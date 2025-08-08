@@ -31,14 +31,18 @@ For Software:
 
 ### Implementation
 For Software:
-# Installation
+
+#### Installation
+```bash
 git clone https://github.com/hisham1665/kazhutha
 cd kazhutha
 npm install
+```
 
-# Run
-[commands]
+#### Run
+```bash
 npm run dev
+```
 
 ### Project Documentation
 For Software:
