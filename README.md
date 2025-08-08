@@ -23,11 +23,12 @@ By chatting with this bot, you can feel that someone is dumb than you.
 
 ## Technical Details
 ### Technologies/Components Used
-For Software:
-- Typescript
-- Next.js
--gemini 2.5 flash
-  -V0 Ai
+- **Framework**: Next.js
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **AI**: Google Gemini 1.5 Flash
+- **Animation**: Framer Motion
 
 
 ### Implementation
