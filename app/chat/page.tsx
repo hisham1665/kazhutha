@@ -31,11 +31,12 @@ const randomDoubts = [
 ]
 
 export default function ChatPage() {
-  const [currentDoubt, setCurrentDoubt] = useState(() => randomDoubts[Math.floor(Math.random() * randomDoubts.length)])
+  const randomIndex = useRef(Math.floor(Math.random() * randomDoubts.length));
+  const [currentDoubt, setCurrentDoubt] = useState(randomDoubts[randomIndex.current]);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: currentDoubt,
+      text: randomDoubts[randomIndex.current],
       sender: 'other',
       timestamp: new Date()
     }
