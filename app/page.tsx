@@ -14,7 +14,7 @@ export default function HomePage() {
           <div className="flex justify-between items-center py-6">
             <motion.div className="flex items-center gap-2" initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 200 }}>
               <span className="text-3xl">🫏</span>
-              <span className="ml-2 text-3xl font-extrabold text-pink-600 tracking-widest drop-shadow-lg">Kazhutha Doubt Chat</span>
+              <span className="ml-2 text-3xl font-extrabold text-pink-600 tracking-widest drop-shadow-lg">Kazhutha Chat</span>
             </motion.div>
             <Link href="/chat">
               <motion.div whileHover={{ scale: 1.1, rotate: -5 }} whileTap={{ scale: 0.95 }}>
@@ -29,8 +29,8 @@ export default function HomePage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
             <motion.h1 className="text-4xl font-extrabold text-pink-600 sm:text-5xl md:text-6xl" initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}>
-              Dopamine Doubt Dump
-              <span className="block text-yellow-500">Minimal, Fun & Addictive</span>
+              Teach As Much You Can
+              <span className="block text-yellow-500">She is a kazhutha</span>
             </motion.h1>
             <motion.p className="mt-3 max-w-md mx-auto text-base text-blue-700 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
               Try to explain silly questions to a stubborn AI! Enjoy a minimal, dopamine-rich UI with playful colors and micro-animations.
