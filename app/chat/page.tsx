@@ -7,7 +7,8 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { ArrowLeft, Send, MessageCircle } from 'lucide-react'
+import { ArrowLeft, Send } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface Message {
   id: number
@@ -16,18 +17,17 @@ interface Message {
   timestamp: Date
 }
 
-
 const randomDoubts = [
-  "If the color blue didn't exist, would we still have a word for the sky?",
-  "Does a tree falling in a forest really make a sound if no one is there to hear it?",
-  "Could an AI ever truly experience consciousness or is it just simulating it?",
-  "If you could travel back in time and meet your past self, what would that even mean for causality?",
-  "Are dreams just random electrical signals or do they have a deeper purpose?",
-  "Is 'nothing' a real thing, or is it just the absence of something?",
-  "Does the universe have a center?",
-  "If a person with a split personality commits a crime, which personality should be punished?",
-  "Can you have a truly original thought, or is every idea a combination of others?",
-  "Is the idea of free will compatible with the laws of physics?"
+    "If the color blue didn't exist, would we still have a word for the sky?",
+    "Does a tree falling in a forest really make a sound if no one is there to hear it?",
+    "Could an AI ever truly experience consciousness or is it just simulating it?",
+    "If you could travel back in time and meet your past self, what would that even mean for causality?",
+    "Are dreams just random electrical signals or do they have a deeper purpose?",
+    "Is 'nothing' a real thing, or is it just the absence of something?",
+    "Does the universe have a center?",
+    "If a person with a split personality commits a crime, which personality should be punished?",
+    "Can you have a truly original thought, or is every idea a combination of others?",
+    "Is the idea of free will compatible with the laws of physics?"
 ]
 
 export default function ChatPage() {
@@ -47,22 +47,24 @@ export default function ChatPage() {
 
   const scrollToBottom = () => {
     if (scrollAreaRef.current) {
-      const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]')
-      if (scrollContainer) {
-        scrollContainer.scrollTop = scrollContainer.scrollHeight
+      const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
+      if (viewport) {
+        setTimeout(() => {
+          viewport.scrollTop = viewport.scrollHeight;
+        }, 0);
       }
     }
-  }
+  };
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages])
+  }, [messages, isTyping])
 
   const sendMessage = async () => {
-    if (inputValue.trim() === '') return
+    if (inputValue.trim() === '' || isTyping) return
 
     const newMessage: Message = {
-      id: messages.length + 1,
+      id: Date.now(),
       text: inputValue,
       sender: 'user',
       timestamp: new Date()
@@ -80,7 +82,7 @@ export default function ChatPage() {
       })
       const data = await res.json()
       const responseMessage: Message = {
-        id: messages.length + 2,
+        id: Date.now() + 1,
         text: data.text || 'Sorry, I could not generate a response.',
         sender: 'other',
         timestamp: new Date()
@@ -90,7 +92,7 @@ export default function ChatPage() {
       setMessages(prev => [
         ...prev,
         {
-          id: messages.length + 2,
+          id: Date.now() + 1,
           text: 'Error: Failed to get response from Gemini API.',
           sender: 'other',
           timestamp: new Date()
@@ -102,109 +104,128 @@ export default function ChatPage() {
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !isTyping) {
       sendMessage()
     }
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex flex-col h-screen min-h-screen bg-gradient-to-br from-pink-100 via-yellow-100 to-blue-100">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white/80 shadow-lg backdrop-blur border-b-2 border-pink-200 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
-            <div className="flex items-center space-x-4">
-              <Link href="/">
-                <Button variant="ghost" size="sm">
+            <Link href="/">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button variant="ghost" className="text-pink-600 hover:bg-pink-100 rounded-full">
                   <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Home
+                  Home
                 </Button>
-              </Link>
-              <div className="flex items-center space-x-2">
-                <MessageCircle className="h-6 w-6 text-indigo-600" />
-                <h1 className="text-xl font-semibold text-gray-900">Chat Room</h1>
-              </div>
+              </motion.div>
+            </Link>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🫏</span>
+              <h1 className="text-xl font-extrabold text-pink-600 tracking-widest drop-shadow-lg">Kazhutha Chat</h1>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">Online</span>
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse border-2 border-green-200"></div>
+              <span className="text-sm text-blue-700 font-semibold">Online</span>
             </div>
           </div>
         </div>
       </header>
 
       {/* Chat Container */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-       
-          <CardHeader className="pb-4">
-            <CardTitle className="flex items-center space-x-2">
+      <div className="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col min-h-0">
+        <Card className="flex-grow flex flex-col bg-white/80 border-2 border-pink-200 shadow-xl rounded-2xl overflow-hidden">
+          <CardHeader className="border-b-2 border-pink-100">
+            <CardTitle className="flex items-center space-x-3">
               <Avatar>
-                <AvatarFallback className="bg-red-500 text-white">K</AvatarFallback>
+                <AvatarFallback className="bg-pink-500 text-white text-2xl">🫏</AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-medium">Kazhutha</p>
-                <p className="text-sm text-gray-500">can i ask you a doubt...?</p>
+                <p className="font-bold text-pink-600">Kazhutha</p>
+                <p className="text-sm text-yellow-500">The Confused Donkey</p>
               </div>
             </CardTitle>
           </CardHeader>
-          
-          <CardContent className="flex-1 flex flex-col p-0">
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-6" ref={scrollAreaRef}>
-              <div className="space-y-4 pb-4">
+          <CardContent className="flex-grow p-0 overflow-hidden">
+            <ScrollArea ref={scrollAreaRef} className="h-full p-4">
+              <div className="space-y-4">
                 {messages.map((message) => (
-                  <div
+                  <motion.div
                     key={message.id}
-                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className={`flex items-end gap-2 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
+                    {message.sender === 'other' && (
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className="bg-pink-500 text-white">🫏</AvatarFallback>
+                      </Avatar>
+                    )}
                     <div
-                      className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg break-words whitespace-pre-wrap overflow-hidden ${
+                      className={`max-w-xs md:max-w-md lg:max-w-lg p-3 rounded-2xl break-words ${
                         message.sender === 'user'
-                          ? 'bg-indigo-600 text-white'
-                          : 'bg-gray-200 text-gray-900'
+                          ? 'bg-blue-500 text-white rounded-br-none'
+                          : 'bg-gray-200 text-gray-800 rounded-bl-none'
                       }`}
-                      style={{ wordBreak: 'break-word' }}
                     >
-                      <p className="text-sm break-words whitespace-pre-wrap" style={{ wordBreak: 'break-word' }}>{message.text}</p>
-                      <p className={`text-xs mt-1 ${
-                        message.sender === 'user' ? 'text-indigo-200' : 'text-gray-500'
-                      }`}>
-                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                      </p>
+                      <p>{message.text}</p>
                     </div>
-                  </div>
+                    {message.sender === 'user' && (
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className="bg-blue-500 text-white">You</AvatarFallback>
+                      </Avatar>
+                    )}
+                  </motion.div>
                 ))}
                 {isTyping && (
-                  <div className="flex justify-start">
-                    <div className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex items-end gap-2 justify-start"
+                  >
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback className="bg-pink-500 text-white">🫏</AvatarFallback>
+                    </Avatar>
+                    <div className="bg-gray-200 p-3 rounded-2xl rounded-bl-none">
+                      <div className="flex items-center space-x-1">
+                        <span className="w-2 h-2 bg-pink-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                        <span className="w-2 h-2 bg-pink-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                        <span className="w-2 h-2 bg-pink-400 rounded-full animate-bounce"></span>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
               </div>
-            </div>
-
-            {/* Input */}
-            <div className="border-t p-4">
-              <div className="flex space-x-2">
-                <Input
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type your message..."
-                  className="flex-1"
-                  disabled={isTyping}
-                />
-                <Button onClick={sendMessage} disabled={isTyping || inputValue.trim() === ''}>
-                  <Send className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+            </ScrollArea>
           </CardContent>
+          <div className="p-4 border-t-2 border-pink-100">
+            <div className="flex items-center space-x-2">
+              <Input
+                type="text"
+                placeholder="Try to explain..."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="flex-grow rounded-full focus:border-pink-400"
+                disabled={isTyping}
+              />
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <Button
+                  onClick={sendMessage}
+                  className="rounded-full bg-gradient-to-r from-pink-400 to-yellow-400 text-white"
+                  disabled={isTyping || inputValue.trim() === ''}
+                >
+                  <Send className="h-5 w-5" />
+                </Button>
+              </motion.div>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
   )
