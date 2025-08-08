@@ -4,8 +4,8 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Kazhutha Chat',
+  description: 'this is app to chat with a world class kazhutha',
   generator: 'v0.dev',
 }
 
