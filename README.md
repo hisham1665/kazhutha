@@ -25,10 +25,7 @@ By chatting with this bot, you can feel that someone is dumb than you.
 ### Technologies/Components Used
 - **Framework**: Next.js
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **AI**: Google Gemini 1.5 Flash
-- **Animation**: Framer Motion
+- **AI**: Google Gemini 2.5 Flash
 
 
 ### Implementation
