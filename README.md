@@ -48,23 +48,21 @@ npm run dev
 For Software:
 
 # Screenshots
-![Screenshot1](Add screenshot 1 here with proper name)
+
 Add caption <img width="1893" height="901" alt="screenshot1" src="https://github.com/user-attachments/assets/4082a2b0-fafb-41e7-aa2c-2995e66f2f99" />
 This is the landing page of the website
 
-![Screenshot2](Add screenshot 2 here with proper name)
+
 <img width="1892" height="902" alt="screenshot2" src="https://github.com/user-attachments/assets/f8288bbe-d68b-4e83-b74a-f5a5fa3b314e" />
 This is the next scrollled window of the website
  
 
-![Screenshot3](Add screenshot 3 here with proper name)
 <img width="1908" height="902" alt="screenshot3" src="https://github.com/user-attachments/assets/fd00734a-7608-4251-8857-e7a718c10199" />
 This is the chat page of the website
 
 
 ### Project Demo
-# Video
-[Add your demo video link here] 
+# Video 
 https://github.com/user-attachments/assets/be776d52-8274-4f6f-9b57-2c85f5cd4f16
 this video shows how to use the kazhutha chat. 
 
