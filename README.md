@@ -27,6 +27,7 @@ For Software:
 - Typescript
 - Next.js
 -gemini 2.5 flash
+  -V0 Ai
 
 
 ### Implementation
