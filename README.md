@@ -1,7 +1,7 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Kazhutha Chat] 🎯
+# Kazhutha Chat 🎯
 
 
 ## Basic Details
@@ -49,24 +49,30 @@ For Software:
 
 # Screenshots
 ![Screenshot1](Add screenshot 1 here with proper name)
-Add caption explaining what this shows
+Add caption <img width="1893" height="901" alt="screenshot1" src="https://github.com/user-attachments/assets/4082a2b0-fafb-41e7-aa2c-2995e66f2f99" />
+This is the landing page of the website
 
 ![Screenshot2](Add screenshot 2 here with proper name)
-Add caption explaining what this shows
+<img width="1892" height="902" alt="screenshot2" src="https://github.com/user-attachments/assets/f8288bbe-d68b-4e83-b74a-f5a5fa3b314e" />
+This is the next scrollled window of the website
+ 
 
 ![Screenshot3](Add screenshot 3 here with proper name)
-Add caption explaining what this shows
+<img width="1908" height="902" alt="screenshot3" src="https://github.com/user-attachments/assets/fd00734a-7608-4251-8857-e7a718c10199" />
+This is the chat page of the website
 
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-Explain what the video demonstrates
+[Add your demo video link here] 
+https://github.com/user-attachments/assets/be776d52-8274-4f6f-9b57-2c85f5cd4f16
+this video shows how to use the kazhutha chat. 
+
 
 
 ## Team Contributions
-- Hisham K.H.: UX/UI Development 
-- Irfan Nazir: React and Prompt Engineering
+- Hisham K.H.: UX/UI Builidng Using Next JS 
+- Irfan Nazir: AI  and Prompt Engineering
 
 ---
 Made with ❤ at TinkerHub Useless Projects 
